@@ -13,6 +13,7 @@ staffpattern = [
 studentpattern = [
   
     path('joinclass',studentview.AddClass,name="joinclass"),
+    path('deleteclass/<str:classname>',studentview.DeleteView,name="removeclass")
 
 
 ]

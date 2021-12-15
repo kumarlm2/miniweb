@@ -19,9 +19,20 @@ def AddClass(request):
         form = JoinClassForm(data=request.POST,user=request.user)
         if form.is_valid():
             print("valid")
+            return HttpResponseRedirect('/profile')
         return render(request, 'main/create.html',{'form':form})
     form = JoinClassForm(user=request.user)
     return render(request, 'main/create.html',{'form':form})  
+
+@csrf_exempt
+def DeleteView(request,classname):
+    if request.method == 'DELETE':
+        classname = Class.objects.get(classname=classname)
+        classname.user.remove(request.user)
+        classname.save()
+        return JsonResponse({'success':'deleted successfully'},safe=True,status = 201)
+    return JsonResponse({'error':'not allowed'},safe=False,status = 200)   
+
 
 
 class ClassJoinView(LoginRequiredMixin,UpdateView):

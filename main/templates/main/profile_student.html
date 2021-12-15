@@ -148,13 +148,33 @@
              
             {% for classs in classes.all %}
            
-            <div class="card" onclick=" showstudents('{{ classs.pk }}')  " > 
+            <div class="card"  > 
              <div class="container" >
+              
                 {% if user == classs.owner %}
                 <i class="fas fa-user-friends"></i>
                 {% endif %}
                
-                <h4><b>{{classs.classname}}</b></h4> 
+                <h4 onclick=" showstudents('{{ classs.pk }}')  " ><b>{{classs.classname}}</b></h4> 
+                <a><i class="fas fa-trash-alt" onclick="deleteClass('{{ classs.classname }}')" ></i></a>
+                <script>
+                function deleteClass(name){
+               
+                  fetch('deleteclass/'+name,{
+                    method:'DELETE'
+                  }).then(res=>{
+                    if(res.status == 201) {
+                      alert('deleted')
+                      location.reload()
+                    }  
+                    else if (res.status == 200) 
+                       alert('error')
+                    else 
+                    alert('network error')   
+                  } 
+                  )
+                }
+                  </script>
                 </div>
                 <span class="tooltiptext">click to see details</span>
                 <style>

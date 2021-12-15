@@ -144,10 +144,9 @@
            
             <div class="card" onclick=" showstudents('{{ classs.pk }}')  " > 
              <div class="container">
-                <h4><b>{{classs.classname}}</b> 
+                <h4><b>{{classs.classname}}  </b> 
                   <a href=" {% url  'classes' classs.classname  %} " target="_blank"><i class="fas fa-eye"></i></a>
                   </h4> 
-                 
                 <a href=" {% url  'updateclass' classs.pk  %} " target="_blank"><i class="fas fa-pencil-alt"></i></a> 
                 </div>
                 <span class="tooltiptext">click to see details</span>
